@@ -7,8 +7,8 @@ import { ConfigService } from '../config.service';
   styleUrls: ['./login-vista.component.sass']
 })
 export class LoginVistaComponent implements OnInit {
-  private username: any;
-  private password: any;
+  private username = 'admin';
+  private password = 'pw';
 
   constructor(private config: ConfigService) { }
 

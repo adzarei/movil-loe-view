@@ -9,17 +9,15 @@ export class ConfigService {
 
   getLoginUrl = 'http://localhost:8080/auth/users/login';
 
-
-
   constructor(private http: HttpClient) {}
 
-  loginRequest = function(user, pass) {
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/x-www-form-urlencoded'
-        //'Authorization': 'my-auth-token'
-      })};
+  trySavedTokenRequest(token, url){
+    this.http.post(url, undefined, null).toPromise()
+  }
+
+
+  loginRequest = function(user, pass) {
 
     let body = new URLSearchParams();
     body.set('username' , user );
@@ -28,17 +26,14 @@ export class ConfigService {
     const data = {
       username : user,
       password : pass
-    }
+    };
 
-    this.http.post(this.getLoginUrl, body.toString() , httpOptions).toPromise().then(function() {
-      debugger;
+    this.http.post(this.getLoginUrl, body.toString()).toPromise().then(function(response) {
+
+      localStorage.setItem('authtoken',response.uuid);
+
     });
   };
 
-/* TODO: Token BEARER + TOKEN.
-  createAuthorizationHeader(headers:Headers) {
-    headers.append('Authorization', 'Basic ' +
-      btoa('a20e6aca-ee83-44bc-8033-b41f3078c2b6:c199f9c8-0548-4be79655-7ef7d7bf9d20'));
-  }
-  */
+
 }
