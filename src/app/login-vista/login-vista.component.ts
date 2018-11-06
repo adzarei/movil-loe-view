@@ -7,15 +7,17 @@ import { ConfigService } from '../config.service';
   styleUrls: ['./login-vista.component.sass']
 })
 export class LoginVistaComponent implements OnInit {
+  private username: any;
+  private password: any;
 
-  constructor(private config : ConfigService) { }
+  constructor(private config: ConfigService) { }
 
   ngOnInit() {
 
   }
 
-  login(){
-    this.config.loginRequest(this.username,this.password);
+  login() {
+    this.config.loginRequest(this.username, this.password);
   }
 
 }
