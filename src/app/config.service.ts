@@ -9,11 +9,16 @@ export class ConfigService {
 
   getLoginUrl = 'http://localhost:8080/auth/users/login';
 
+  //TODO: change for token test entry point.
+  getLibros = 'http://localhost:8080/api/v1/libros/1';
+
   constructor(private http: HttpClient) {}
 
 
-  trySavedTokenRequest(token, url){
-    this.http.post(url, undefined, null).toPromise()
+  trySavedTokenRequest = function(){
+
+    this.http.post(this.getLibros, undefined, null).toPromise();
+    return false;
   }
 
 
@@ -23,15 +28,11 @@ export class ConfigService {
     body.set('username' , user );
     body.set('password' , pass );
 
-    const data = {
-      username : user,
-      password : pass
-    };
-
     this.http.post(this.getLoginUrl, body.toString()).toPromise().then(function(response) {
 
-      localStorage.setItem('authtoken',response.uuid);
-
+      if (response){
+        localStorage.setItem('authtoken',response.uuid);
+      }
     });
   };
 

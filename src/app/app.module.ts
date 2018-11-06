@@ -10,13 +10,16 @@ import { VistaListaComponent } from './vista-lista/vista-lista.component';
 import { LoginVistaComponent } from './login-vista/login-vista.component';
 import {TokenInterceptor} from './auth/token.interceptor';
 import { IniComponent } from './ini/ini.component';
+import {WsErrHandlerInterceptor} from './auth/wsErrHandler.interceptor';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VistaListaComponent,
     LoginVistaComponent,
-    IniComponent
+    IniComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,12 @@ import { IniComponent } from './ini/ini.component';
     provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-  }
+  },
+    {
+    provide: HTTP_INTERCEPTORS,
+      useClass:WsErrHandlerInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
