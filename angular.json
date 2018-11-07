@@ -135,5 +135,8 @@
       }
     }
   },
-  "defaultProject": "movil-loe-view"
+  "defaultProject": "movil-loe-view",
+  "cli": {
+    "defaultCollection": "@nativescript/schematics"
+  }
 }
